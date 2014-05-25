@@ -27,7 +27,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     auto console = director->getConsole();
-    console->listenOnTCP(4567);
+    console->listenOnTCP(1234);
     // create a scene. it's an autorelease object
     auto scene = HelloWorld::createScene();
 
