@@ -82,14 +82,15 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     
-    static struct Console::Command command =
-        {"label", "Change or print the current label string. Args: [<label string>]", [label](int fd, const std::string& args) {
+    struct Console::Command command = {
+    	"label", 
+    	"Change or print the current label string. Args: [<label string>]", 
+    	[label](int fd, const std::string& args) {
             if (args.length()==0)
             {
-                char buf[64];
-                sprintf(buf, "Label: %s\n",label->getString().c_str());
-                send(fd, buf, strlen(buf),0);
-                return;
+                const std::string& str = label->getString();
+                send(fd, str.c_str(), str.length(), 0);
+                send(fd, "\n", 1, 0);
             }
             else
             {
